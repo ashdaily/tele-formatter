@@ -11,10 +11,6 @@ class Base:
         """
         self.phone_number = phone_number
 
-    def _remove_country_code_prefix(self):
-        if self.country_code_number.startswith(self.country_code_number):
-            self.phone_number = self.phone_number.removeprefix(self.country_code_number)
-
     def _find_hyphen_indexes(self):
         return [i for i, _ in enumerate(self.example_phone_number) if _ == "-"]
 

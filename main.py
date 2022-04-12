@@ -12,21 +12,18 @@ def main(phone_number: str, country_name : str) -> str:
     return TeleFormatter(phone_number, country_name).format()
 
 
-if __name__ == '__main__':
-    """
-        >> python3 main.py -n 0312345678 -c jp
-        "03-1234-5678"
-        >> python3 main.py -n ０３．１２３５．５６７８ -c jp
-        "03-1234-5678"
-    """
+def collect_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--number_to_format", type=str)
     parser.add_argument("-c", "--country", type=str)
     args = parser.parse_args()
     number = args.number_to_format
     country = args.country
+    return number, country
 
-    main(number, country)
 
+if __name__ == '__main__':
+    phone_number, country_name = collect_args()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    result = main(phone_number, country_name)
+    print(result)

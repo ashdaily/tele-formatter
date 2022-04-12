@@ -30,7 +30,6 @@ class TeleFormatter:
     def format(self):
         self._clean()
 
-
         factory_class = self._get_factory_class()
 
         return factory_class(self.phone_number).format()

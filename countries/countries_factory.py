@@ -10,9 +10,10 @@ class Countries:
             self.list_of_countries[country_code] = cls
 
     def get(self, country_name):
-        if country_name is None:
+        _cls = self.list_of_countries.get(country_name)
+        if _cls is None:
             raise NotImplementedError("Country not implemented, add a country in countries.countries_factory file")
-        return self.list_of_countries.get(country_name)
+        return _cls
 
 
 all_formatters = Countries()
