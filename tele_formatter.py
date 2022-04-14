@@ -1,41 +1,38 @@
-from countries.countries_factory import all_formatters
+from utils import PhoneNumber
 
 
 class TeleFormatter:
-    def __init__(self, phone_number: str, country_name: str):
-        self.phone_number = phone_number
-        self.country_name = country_name.lower()
+    formats = [
+        {"prefix_size": 2, "example_phone_number": "00-0000-0000"},
+        {"prefix_size": 3, "example_phone_number": "000-000-0000"},
+        {"prefix_size": 4, "example_phone_number": "0000-00-0000"},
+        {"prefix_size": 5, "example_phone_number": "00000-0-0000"}
+    ]
 
-    def _strip_spaces(self):
-        # trim spaces
-        self.phone_number = self.phone_number.strip()
-        self.country_name = self.country_name.strip()
+    def __init__(self, phone_number: str):
+        self.phone_number = PhoneNumber(phone_number).clean()
+        self.prefix = PhoneNumber(self.phone_number).get_prefix_match()
+        self.formatted_phone_number = None
 
-    def _remove_special_symbols(self):
-        self.phone_number = self.phone_number.replace("-", "").replace(".","").replace("．", "")
+    def _set_example_phone_number(self):
+        for _format in self.formats:
+            if _format.get("prefix_size") == len(self.prefix):
+                self.example_phone_number = _format.get("example_phone_number")
+                return
+        raise Exception(f"prefix: {self.prefix} corresponding format_size not found in {self.__class__.__name__}")
 
-    def _ensure_number_in_string(self):
-        self.phone_number = int(self.phone_number)
-        self.phone_number = str(self.phone_number)
+    def _find_hyphen_indexes(self):
+        return [i for i, _ in enumerate(self.example_phone_number) if _ == "-"]
 
-    def _clean(self):
-        self._strip_spaces()
-        self._remove_special_symbols()
-        self._ensure_number_in_string()
+    def _add_hyphens(self):
+        hyphen_indexes = self._find_hyphen_indexes()
 
-    def _get_factory_class(self):
-        country = all_formatters.get(self.country_name)
-        return country
+        self.formatted_phone_number = list(self.phone_number)
+        for i in hyphen_indexes:
+            self.formatted_phone_number.insert(i, "-")
+        self.formatted_phone_number = "".join(self.formatted_phone_number)
 
     def format(self):
-        self._clean()
-
-        factory_class = self._get_factory_class()
-
-        return factory_class(self.phone_number).format()
-
-
-
-
-
-
+        self._set_example_phone_number()
+        self._add_hyphens()
+        return self.formatted_phone_number
