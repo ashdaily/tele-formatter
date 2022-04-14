@@ -3,10 +3,10 @@ from utils import PhoneNumber
 
 class TeleFormatter:
     formats = [
-        {"prefix_size": 2, "example_phone_number": "00-0000-0000"},
-        {"prefix_size": 3, "example_phone_number": "000-000-0000"},
-        {"prefix_size": 4, "example_phone_number": "0000-00-0000"},
-        {"prefix_size": 5, "example_phone_number": "00000-0-0000"}
+        {"prefix_size": 2, "example_phone_number": "XX-XXXX-XXXX"},
+        {"prefix_size": 3, "example_phone_number": "XXX-XXX-XXXX"},
+        {"prefix_size": 4, "example_phone_number": "XXXX-XX-XXXX"},
+        {"prefix_size": 5, "example_phone_number": "XXXXX-X-XXXX"}
     ]
 
     def __init__(self, phone_number: str):

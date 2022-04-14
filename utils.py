@@ -21,7 +21,10 @@ class PhoneNumber:
     def _ensure_number_is_string(self):
         _phone_number = ""
         for i in self.phone_number:
-            _phone_number += str(int(i))
+            try:
+                _phone_number += str(int(i))
+            except ValueError:
+                continue
         self.phone_number = _phone_number
 
     def _get_area_codes(self):
