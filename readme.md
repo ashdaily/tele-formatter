@@ -31,6 +31,6 @@ This is how it works:
 ```
 
 ### Known issues:
-- Doesn't handle cell phone numbers
+- Doesn't handle cell phone number prefixes and special codes
 
 
