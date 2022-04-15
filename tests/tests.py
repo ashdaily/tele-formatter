@@ -19,7 +19,7 @@ class TestTeleFormatter(TestCase):
         formatted_number = TeleFormatter(phone_number).format()
         self.assertEqual(formatted_number, "0123-00-0000")
 
-    def test_phone_numbers_formatting_for_four_digit_prefix(self):
+    def test_phone_numbers_formatting_for_five_digit_prefix(self):
         phone_number = "0126700000"
         formatted_number = TeleFormatter(phone_number).format()
         self.assertEqual(formatted_number, "01267-0-0000")
